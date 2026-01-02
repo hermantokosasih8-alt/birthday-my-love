@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Love ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{overflow:hidden}
+
+/* ================= BACKGROUND AWAL ================= */
+#passwordScreen{
+  position:fixed;inset:0;
+  background:
+    radial-gradient(circle at top,#ffd6e8,#ff6f91),
+    linear-gradient(to bottom,#ff6f91,#ffc1cc);
+  display:flex;justify-content:center;align-items:center;
+  animation:bgMove 8s infinite alternate;
+  z-index:100;
+}
+@keyframes bgMove{
+  from{filter:hue-rotate(0deg)}
+  to{filter:hue-rotate(15deg)}
+}
+
+.password-box{
+  background:rgba(255,255,255,.9);
+  padding:35px;border-radius:20px;
+  box-shadow:0 0 40px rgba(255,0,120,.4);
+  text-align:center;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.password-box h2{color:#ff4d6d;margin-bottom:15px}
+.password-box input{
+  padding:12px;width:220px;
+  border-radius:12px;border:1px solid #ccc;
+  font-size:16px
+}
+.password-box button{
+  margin-top:12px;
+  padding:12px 22px;
+  border:none;border-radius:14px;
+  background:#ff6f91;color:white;
+  font-size:16px;cursor:pointer;
+  box-shadow:0 6px 20px rgba(255,0,120,.4);
+}
+
+/* countdown hari */
+#countdownBox{margin-top:15px;color:#d6336c;font-weight:bold}
+#countdownTime{
+  display:inline-block;margin-top:6px;
+  background:#ffe4ec;padding:8px 14px;
+  border-radius:14px;font-size:18px
+}
+
+/* ================= OPENING ================= */
+#openingAnim{
+  position:fixed;inset:0;
+  background:radial-gradient(circle,#ff9ebc,#ff4d6d);
+  display:none;justify-content:center;align-items:center;
+  color:white;font-size:40px;
+  animation:fadeIn 2s forwards;
+  z-index:90;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ================= COUNT 3 2 1 ================= */
+#count321{
+  position:fixed;inset:0;
+  display:none;justify-content:center;align-items:center;
+  flex-direction:column;
+  background:radial-gradient(circle,#ff6f91,#000);
+  z-index:91;
+}
+#count321 .num{
+  font-size:150px;font-weight:bold;
+  color:white;text-shadow:0 0 30px #ff4d6d;
+  animation:pop 1s ease forwards;
+}
+#count321 .countText{
+  font-size:32px;color:#ffd6e8;margin-top:20px;
+  animation:fadeText 1s forwards;
+}
+@keyframes pop{
+  0%{transform:scale(.2);opacity:0}
+  60%{transform:scale(1.3)}
+  100%{transform:scale(1)}
+}
+@keyframes fadeText{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+
+/* ================= PRANK ================= */
+#prankBox{
+  position:fixed;inset:0;
+  background:black;
+  display:none;justify-content:center;align-items:center;
+  flex-direction:column;
+  color:white;text-align:center;
+  z-index:92;
+}
+#prankBox div{animation:shake .6s infinite}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+
+/* ================= TIKTOK TEXT ================= */
+#tiktokStyle{
+  position:fixed;inset:0;
+  background:radial-gradient(circle,#000,#111);
+  display:none;justify-content:center;align-items:center;
+  flex-direction:column;z-index:80;
+}
+.tt-text{
+  color:white;font-size:36px;
+  margin:10px;opacity:0;
+  transform:scale(.8);
+  transition:1s;
+}
+
+/* ================= SLIDESHOW ================= */
+.slideshow{position:fixed;inset:0;display:none;z-index:50}
+.slideshow img{
+  position:absolute;width:100%;height:100%;
+  object-fit:cover;opacity:0;
+  animation:slide 30s infinite;
+}
+.slideshow img:nth-child(1){animation-delay:0s}
+.slideshow img:nth-child(2){animation-delay:5s}
+.slideshow img:nth-child(3){animation-delay:10s}
+.slideshow img:nth-child(4){animation-delay:15s}
+.slideshow img:nth-child(5){animation-delay:20s}
+.slideshow img:nth-child(6){animation-delay:25s}
+@keyframes slide{
+  0%{opacity:0}
+  10%{opacity:1}
+  30%{opacity:1}
+  40%{opacity:0}
+}
+/* ---------- UCAPAN ---------- */
+#textContent { position:fixed; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; text-align:center; padding-top:60px; opacity:0; transition:all 1.2s ease; z-index:60; color:black; background: radial-gradient(circle at center, rgba(255,80,120,0.1), rgba(0,0,0,0.3)); }
+
+#textContent.show { opacity:1; }
+
+.side-photo-box { position:absolute; width:170px; height:170px; object-fit:cover; border-radius:12px; border:3px solid #fff; box-shadow:0 0 18px rgba(255,255,255,0.9);}
+.side-left-1{left:70px;top:35%;transform:rotate(-8deg);}
+.side-left-2{left:100px;top:55%;transform:rotate(-12deg);}
+.side-right-1{right:70px;top:35%;transform:rotate(8deg);}
+.side-right-2{right:100px;top:55%;transform:rotate(12deg);}
+.birthday-photo-box{width:180px;height:180px;object-fit:cover;border-radius:15px;border:4px solid #fff;box-shadow:0 0 20px rgba(255,255,255,0.8);margin-bottom:20px;transition:opacity 1s;}
+.ucapan-columns { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; max-width:900px; }
+.ucapan-columns .column-left, .ucapan-columns .column-right { flex:1; min-width:280px; text-align:left; }
+.ucapan-columns p { font-size:16px; line-height:1.6; }
+
+/* ---------- CAKE ---------- */
+.cake{font-size:70px; position:relative;  margin-top:15px; margin-bottom:10px;}
+.flame{position:absolute; top:-15px; left:50%; transform:translateX(-50%); width:10px; height:18px; background:radial-gradient(circle,#ffd966,#ff6f00); border-radius:50%; animation:flicker 0.15s infinite alternate;}
+@keyframes flicker { from{transform:translateX(-50%) scale(1);opacity:0.9;} to{transform:translateX(-50%) scale(1.2);opacity:1;} }
+
+/* ---------- HEARTS ---------- */
+.heart{position:absolute;font-size:22px; animation:floatHeart 4s linear forwards; pointer-events:none;}
+@keyframes floatHeart {0%{transform:translateY(0) scale(0.6);opacity:0;}20%{opacity:1;}100%{transform:translateY(-150px) scale(1.2);opacity:0;}}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:600px){
+.side-photo-box{width:120px;height:120px;}
+.side-left-1{left:30px;} side-left-2{left:45px;} side-right-1{right:30px;} side-right-2{right:45px;}
+.birthday-photo-box{width:120px;height:120px;}
+.ucapan-columns{flex-direction:column; gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div id="passwordScreen">
+    <div class="password-box">
+        <h2>Masukkan Password ❤️</h2>
+        <input type="password" id="passwordInput" placeholder="Password..."><br>
+        <button onclick="checkPassword()">Buka</button>
+        <p id="error" style="color:red;"></p>
+        <div id="countdownBox">⏳ Menuju Hari Ulang Tahun 🎂 <br>
+            <span id="countdownTime"></span></div>
+        <button onclick="playMusic()">▶ Putar Lagu</button>
+        <audio id="music" loop>
+            <source src="image/lagu.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+</div>
+
+<!-- TEKS AWAL SEBELUM 3 2 1 -->
+<div id="openingAnim"><span>Aku punya sesuatu untukmu ❤️</span></div>
+
+<!-- COUNT 3 2 1 -->
+<div id="count321">
+    <div class="num" id="countNum">3</div>
+    <div class="countText" id="countText">Siap ya sayang...</div>
+</div>
+
+<!-- PRANK BOONG -->
+<div id="prankBox" style="
+position:fixed;
+inset:0;
+background:black;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:92;
+color:white;
+text-align:center;">
+    <div style="font-size:48px; animation:pop 1s forwards;">😝</div>
+    <div style="font-size:36px; margin-top:15px; color:#ffb3c6;">
+        Tapi boong 😜
+    </div>
+    <div style="font-size:22px; margin-top:10px; opacity:0.8;">
+        Ulang dari awal ya ❤️
+    </div>
+</div>
+
+<!-- TIKTOK STYLE -->
+<div id="tiktokStyle">
+    <div class="tt-text">Hai Sayangku...</div>
+    <div class="tt-text">Hari ini hari spesialmu ✨</div>
+    <div class="tt-text">Semoga hari mu bahagia seterusnya🎉</div>
+    <div class="tt-text">Aku bersyukur punya kamu 💕</div>
+    <div class="tt-text">Selamat ulang tahun ❤️</div>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="slideshow" id="mainContent">
+    <img src="image/foto9.jpeg">
+    <img src="image/foto2.png">
+    <img src="image/foto3.png">
+    <img src="image/foto10.jpeg">
+    <img src="image/foto5.png">
+    <img src="image/foto6.png">
+</div>
+
+<!-- UCAPAN -->
+<div id="textContent">
+    <img src="image/foto7.jpeg" class="side-photo-box side-left-1">
+    <img src="image/foto8.jpeg" class="side-photo-box side-left-2">
+    <img src="image/foto17.jpeg" class="side-photo-box side-right-1">
+    <img src="image/foto11.jpeg" class="side-photo-box side-right-2">
+    <img id="ucapanPhoto" src="image/foto10.jpeg" class="birthday-photo-box">
+
+    <h1>🎉🎂 Selamat Ulang Tahun ya, sayangku 💕</h1>
+    <div class="cake">🎂<div class="flame"></div></div>
+
+    <div class="ucapan-columns">
+        <div class="column-left">
+            <p>Di hari spesial ini, aku cuma mau bilang betapa bersyukurnya aku punya kamu dalam hidupku 🥰<br>
+            Terima kasih sudah selalu ada, mengerti aku,<br>
+            dan mencintai aku dengan cara kamu sendiri 💖<br>
+            🌹 Semoga di usia yang baru ini, semua mimpi dan harapanmu satu per satu terwujud ✨</p>
+        </div>
+        <div class="column-right">
+            <p>Semoga kamu selalu diberi kesehatan 🤍, kebahagiaan 😊, dan rezeki yang lancar 💫<br>
+            Aku berharap kita bisa terus berjalan bersama,<br>
+            melewati tawa 😄, air mata 😢, dan semua cerita indah ke depannya 💕<br>
+            Aku sayang kamu hari ini, besok, dan selamanya ❤️‍🔥<br>
+            🎂🎈 Happy Birthday, My Love 🎈🎂<br>
+            💖 Aku sayang kamu, hari ini dan seterusnya 💕</p>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ================== GLOBAL ================== */
+let prankDone = false;
+
+/* ================== COUNTDOWN LOCK ================== */
+const birthdayDate = new Date("2026-01-25T00:00:00").getTime();
+const countdownTime = document.getElementById("countdownTime");
+
+setInterval(()=>{
+    const now = new Date().getTime();
+    const d = birthdayDate - now;
+    if(d<=0){
+        countdownTime.innerHTML="🎉🎂 HARI INI ULANG TAHUNNYA! 🎂🎉";
+        return;
+    }
+    countdownTime.innerHTML =
+        Math.floor(d/(1000*60*60*24))+" Hari "+
+        Math.floor((d%(1000*60*60*24))/(1000*60*60))+" Jam "+
+        Math.floor((d%(1000*60*60))/(1000*60))+" Menit "+
+        Math.floor((d%(1000*60))/1000)+" Detik";
+},1000);
+
+/* ================== MUSIC ================== */
+function playMusic(){
+    document.getElementById("music").play();
+}
+
+/* ================== PASSWORD ================== */
+const correctPassword="21102025";
+function checkPassword(){
+    if(Date.now()<birthdayDate){
+        document.getElementById("error").innerText="⏳ Belum waktunya dibuka ya sayang 💕";
+        return;
+    }
+    if(document.getElementById("passwordInput").value===correctPassword){
+        document.getElementById("passwordScreen").style.display="none";
+        playMusic();
+        showOpeningAnim();
+    }else{
+        document.getElementById("error").innerText="❌ Password salah 😝";
+    }
+}
+
+/* ================== OPENING ================== */
+function showOpeningAnim(){
+    const o=document.getElementById("openingAnim");
+    o.style.display="flex";
+    setTimeout(()=>{
+        o.style.display="none";
+        start321(showTikTokText);
+    },3000);
+}
+
+/* ================== 3 2 1 (FINAL FIX) ================== */
+function start321(next){
+    const box=document.getElementById("count321");
+    const num=document.getElementById("countNum");
+    const text=document.getElementById("countText");
+
+    const data=[
+        {n:3,t:"Siap ya sayang..."},
+        {n:2,t:"Sebentar lagi ❤️"},
+        {n:1,t:"Ini untuk kamu 🎁"}
+    ];
+
+    let i=0;
+	num.innerText = 3; 
+    box.style.display="flex";
+
+    const run=setInterval(()=>{
+        num.innerText=data[i].n;
+        text.innerText=data[i].t;
+        countFireworks();
+        i++;
+
+        if(i>=data.length){
+            clearInterval(run);
+            setTimeout(()=>{
+                box.style.display="none";
+                if(!prankDone){
+                    prankDone=true;
+                    showPrank();
+                }else{
+                    next();
+                }
+            },1000);
+        }
+    },1200);
+}
+
+/* ================== PRANK ================== */
+function showPrank(){
+    const p=document.getElementById("prankBox");
+    p.style.display="flex";
+    setTimeout(()=>{
+        p.style.display="none";
+        start321(showTikTokText);
+    },2500);
+}
+
+/* ================== FIREWORK ================== */
+function countFireworks(){
+    const box=document.getElementById("count321");
+    const cx=innerWidth/2, cy=innerHeight/2;
+
+    for(let i=0;i<12;i++){
+        const s=document.createElement("div");
+        s.innerHTML=Math.random()>0.5?"✨":"❤️";
+        s.style.position="absolute";
+        s.style.left=cx+"px";
+        s.style.top=cy+"px";
+        s.style.transform=`translate(${(Math.random()-0.5)*300}px,${(Math.random()-0.5)*300}px)`;
+        s.style.transition="1s";
+        s.style.opacity=0;
+        box.appendChild(s);
+        setTimeout(()=>s.remove(),1200);
+    }
+}
+
+/* ================== TIKTOK ================== */
+function showTikTokText(){
+    const box=document.getElementById("tiktokStyle");
+    const t=document.querySelectorAll(".tt-text");
+    box.style.display="flex";
+    t.forEach((e,i)=>setTimeout(()=>e.style.opacity=1,i*1400));
+
+    setTimeout(()=>{
+        box.style.display="none";
+        document.getElementById("mainContent").style.display="block";
+        setTimeout(showGreeting,30000);
+    },t.length*1400+800);
+}
+
+// ---------- UCAPAN ----------
+function showGreeting(){
+    document.getElementById("mainContent").style.display="none";
+    const text=document.getElementById("textContent"); text.style.display="flex";
+    setTimeout(()=>{text.classList.add("show"); startHearts();},50);
+}
+function startHearts(){
+    setInterval(()=>{
+        const heart=document.createElement("div"); heart.className="heart"; heart.innerHTML="❤️";
+        heart.style.left=Math.random()*90+"%"; heart.style.bottom="20px";
+        document.getElementById("textContent").appendChild(heart);
+        setTimeout(()=>heart.remove(),4000);
+    },500);
+}
+
+// ---------- FOTO UCAPAN ----------
+const ucapanPhotos=["image/foto12.jpeg","image/foto18.jpeg","image/foto14.jpeg","image/foto15.jpeg","image/foto16.jpeg"];
+let photoIndex=0; const photoElement=document.getElementById("ucapanPhoto");
+setInterval(()=>{
+    photoElement.style.opacity=0;
+    setTimeout(()=>{
+        photoIndex=(photoIndex+1)%ucapanPhotos.length;
+        photoElement.src=ucapanPhotos[photoIndex];
+        photoElement.style.opacity=1;
+    },800);
+},4000);
+</script>
+
+</body>
+</html>
+
+
+
